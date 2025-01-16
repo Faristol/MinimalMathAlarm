@@ -17,6 +17,9 @@ interface AlarmDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAlarm(alarm: AlarmEntity)
 
+    @Query("SELECT * FROM AlarmEntity WHERE id = :id")
+    suspend fun getAlarmById(id: Int): AlarmEntity?
+
     @Delete
     suspend fun deleteAlarm(alarm: AlarmEntity)
 
