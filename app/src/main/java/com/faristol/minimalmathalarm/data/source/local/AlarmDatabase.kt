@@ -8,6 +8,6 @@ import com.faristol.minimalmathalarm.data.model.converters.Converters
 
 @Database(entities = [AlarmEntity::class], version = 1)
 @TypeConverters(Converters::class)
-abstract class AppDatabase : RoomDatabase(){
+abstract class AlarmDatabase : RoomDatabase(){
     abstract val dao: AlarmDao
 }

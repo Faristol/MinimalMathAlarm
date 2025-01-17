@@ -17,4 +17,6 @@ data class AlarmEntity(
     val alarmProblemType: ProblemType,
     val alarmTargetDays: List<TargetDays>,
     val alarmIsActive: Boolean,
+    val alarmVibrate : Boolean,
+    val alarmAudioUri : String,
 )

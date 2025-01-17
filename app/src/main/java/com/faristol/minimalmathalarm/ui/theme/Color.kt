@@ -1,4 +1,4 @@
-package com.faristol.minimalmathalarm.presentation.theme
+package com.faristol.minimalmathalarm.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

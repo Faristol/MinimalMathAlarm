@@ -18,6 +18,8 @@ class AlarmMapperImpl : AlarmMapper {
             alarmProblemType = entity.alarmProblemType,
             alarmTargetDays = entity.alarmTargetDays,
             alarmIsActive = entity.alarmIsActive,
+            alarmVibrate = entity.alarmVibrate,
+            alarmAudioUri = entity.alarmAudioUri
         )
     }
 
@@ -30,6 +32,8 @@ class AlarmMapperImpl : AlarmMapper {
             alarmProblemType = domain.alarmProblemType,
             alarmTargetDays = domain.alarmTargetDays,
             alarmIsActive = domain.alarmIsActive,
+            alarmVibrate = domain.alarmVibrate,
+            alarmAudioUri = domain.alarmAudioUri
         )
     }
 
