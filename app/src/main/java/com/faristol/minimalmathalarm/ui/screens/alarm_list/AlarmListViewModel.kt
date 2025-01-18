@@ -11,6 +11,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -22,19 +25,40 @@ class AlarmListViewModel @Inject constructor(
     private val getAlarmByIdUseCase: GetAlarmByIdUseCase
 ) : ViewModel() {
 
-    private val _alarmsList = MutableStateFlow<List<Alarm>>(emptyList())
-    val alarmsList: StateFlow<List<Alarm>> =  _alarmsList
+    private val _uiState = MutableStateFlow(AlarmListState())
+    val uiState: StateFlow<AlarmListState> =  _uiState.asStateFlow()
 
-    private val _uiEvent = Channel<UiEvent>()
-
-
-    fun getAlarmsList(){
+    fun getAlarmList(){
         viewModelScope.launch {
-            getAllAlarmsUseCase().collect{ alarm ->
-                _alarmsList.value = alarm
+            getAllAlarmsUseCase().collect { alarms ->
+                _uiState.update { currentState ->
+                    currentState.copy(alarmList = alarms)
+                }
             }
         }
     }
+
+    fun setDarkMode(isDarkMode: Boolean) {
+        _uiState.update { currentState ->
+            currentState.copy(
+                isDarkMode = isDarkMode
+            )
+        }
+    }
+
+    fun insertUpdateAlarm(alarm: Alarm){
+        viewModelScope.launch {
+            insertAlarmUseCase(alarm)
+        }
+
+
+
+
+
+
+
+    }
+
 
 
     // events -> insert alarm, delete delete, open alarm, update alarm (only active or no)
