@@ -1,6 +1,7 @@
 [versions]
 agp = "8.5.2"
 hiltAndroid = "2.51.1"
+hiltNavigation = "1.2.0"
 kotlin = "1.9.0"
 coreKtx = "1.15.0"
 junit = "4.13.2"
@@ -10,6 +11,11 @@ lifecycleRuntimeKtx = "2.8.7"
 activityCompose = "1.10.0"
 composeBom = "2025.01.00"
 roomVersion = "2.6.1"
+navigationCompose = "2.8.5"
+kotlinxSerializationJson = "1.6.3"
+
+
+
 
 
 [libraries]
@@ -19,6 +25,7 @@ androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomVers
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomVersion" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroid" }
+hilt-navigation-compose = {module = "androidx.hilt:hilt-navigation-compose",version.ref = "hiltNavigation"}
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -32,9 +39,10 @@ androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
-
+androidx-navigation-compose = {module =  "androidx.navigation:navigation-compose",version.ref = "navigationCompose"}
+kotlinx-serialization-json = {module = "org.jetbrains.kotlinx:kotlinx-serialization-json",version.ref = "kotlinxSerializationJson"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-
+jetbrainsKotlinSerialization = {id = "org.jetbrains.kotlin.plugin.serialization",version.ref = "kotlin"}

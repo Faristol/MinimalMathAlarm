@@ -1,7 +1,9 @@
 package com.faristol.minimalmathalarm.di
 
 import android.app.Application
+import android.content.Context
 import androidx.room.Room
+import com.faristol.minimalmathalarm.AlarmApp
 import com.faristol.minimalmathalarm.data.repository.AlarmRepository
 import com.faristol.minimalmathalarm.data.repository.AlarmRepositoryImpl
 import com.faristol.minimalmathalarm.data.source.local.AlarmDatabase
@@ -59,5 +61,6 @@ object AppModule {
     fun provideInsertAlarmUseCase(repo: AlarmRepository, mapper: AlarmMapper) : InsertAlarmUseCase {
         return InsertAlarmUseCase(repo,mapper)
     }
+
 
 }

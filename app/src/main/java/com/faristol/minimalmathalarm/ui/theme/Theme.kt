@@ -61,6 +61,7 @@ fun MinimalMathAlarmTheme(
     content: @Composable () -> Unit
 ) {
     val colorScheme = if (darkTheme) DarkColorPalette else LightColorPalette
+
     MaterialTheme(
         colorScheme = colorScheme,
         typography = Typography,

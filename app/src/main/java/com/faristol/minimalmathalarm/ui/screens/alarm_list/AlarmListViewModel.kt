@@ -8,11 +8,9 @@ import com.faristol.minimalmathalarm.domain.usecase.GetAlarmByIdUseCase
 import com.faristol.minimalmathalarm.domain.usecase.GetAllAlarmsUseCase
 import com.faristol.minimalmathalarm.domain.usecase.InsertAlarmUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -22,13 +20,17 @@ class AlarmListViewModel @Inject constructor(
     private val insertAlarmUseCase: InsertAlarmUseCase,
     private val deleteAlarmUseCase: DeleteAlarmUseCase,
     private val getAllAlarmsUseCase: GetAllAlarmsUseCase,
-    private val getAlarmByIdUseCase: GetAlarmByIdUseCase
+    private val getAlarmByIdUseCase: GetAlarmByIdUseCase,
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(AlarmListState())
-    val uiState: StateFlow<AlarmListState> =  _uiState.asStateFlow()
+    private val _uiState = MutableStateFlow(AlarmListState(isDarkMode = false))
+    val uiState: StateFlow<AlarmListState> = _uiState.asStateFlow()
 
-    fun getAlarmList(){
+    init {
+        getAlarmList()
+    }
+
+    private fun getAlarmList() {
         viewModelScope.launch {
             getAllAlarmsUseCase().collect { alarms ->
                 _uiState.update { currentState ->
@@ -38,50 +40,26 @@ class AlarmListViewModel @Inject constructor(
         }
     }
 
-    fun setDarkMode(isDarkMode: Boolean) {
+    fun toggleDarkMode() {
         _uiState.update { currentState ->
             currentState.copy(
-                isDarkMode = isDarkMode
+                isDarkMode = !currentState.isDarkMode
             )
         }
     }
 
-    fun insertUpdateAlarm(alarm: Alarm){
+    fun insertUpdateAlarm(alarm: Alarm) {
         viewModelScope.launch {
             insertAlarmUseCase(alarm)
         }
 
 
-
-
-
-
-
     }
 
-
-
-    // events -> insert alarm, delete delete, open alarm, update alarm (only active or no)
-    //open github project, and change the theme (dark mode)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
+
+
+// events -> insert alarm, delete delete, open alarm, update alarm (only active or no)
+//open github project, and change the theme (dark mode)
+
+

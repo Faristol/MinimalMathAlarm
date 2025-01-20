@@ -1,10 +1,16 @@
 package com.faristol.minimalmathalarm
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.faristol.minimalmathalarm.ui.nav.NavigationWrapper
 import com.faristol.minimalmathalarm.ui.screens.alarm_list.AlarmListScreen
 import com.faristol.minimalmathalarm.ui.screens.alarm_list.AlarmListViewModel
 import com.faristol.minimalmathalarm.ui.theme.MinimalMathAlarmTheme
@@ -12,17 +18,18 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    private val viewModel by viewModels<AlarmListViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        MinimalMathAlarmTheme(true) {
-            setContent {
-                AlarmListScreen()
+        setContent {
+            val alarmListViewModel: AlarmListViewModel = hiltViewModel()
+            val uiState by alarmListViewModel.uiState.collectAsState()
+            MinimalMathAlarmTheme(darkTheme = uiState.isDarkMode) {
+                NavigationWrapper(alarmListViewModel)
             }
         }
     }
-
+}
 //    @Composable
 //    fun MinimalMathAlarmLayout() {
 //        var isDarkTheme by remember { mutableStateOf(false) }
@@ -213,5 +220,5 @@ class MainActivity : ComponentActivity() {
 //    }
 //
 
-}
+
 
