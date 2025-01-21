@@ -25,7 +25,7 @@ class AlarmMapperImpl : AlarmMapper {
 
     override fun mapToAlarmEntityModel(domain: Alarm): AlarmEntity {
         return AlarmEntity(
-            id = domain.id,
+            id = domain.id?: 0,
             alarmTime = domain.alarmTime,
             alarmProblemDifficulty = domain.alarmProblemDifficulty,
             alarmProblemQuantity = domain.alarmProblemQuantity,

@@ -10,11 +10,11 @@ import com.faristol.minimalmathalarm.data.model.enums.TargetDays
 @Entity
 data class AlarmEntity(
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
+    val id: Int = 0,
     val alarmTime: String,
     val alarmProblemDifficulty: ProblemDifficulty,
     val alarmProblemQuantity: Int,
-    val alarmProblemType: ProblemType,
+    val alarmProblemType: List<ProblemType>,
     val alarmTargetDays: List<TargetDays>,
     val alarmIsActive: Boolean,
     val alarmVibrate : Boolean,

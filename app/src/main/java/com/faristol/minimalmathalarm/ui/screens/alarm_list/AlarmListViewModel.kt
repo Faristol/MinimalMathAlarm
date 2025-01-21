@@ -23,7 +23,7 @@ class AlarmListViewModel @Inject constructor(
     private val getAlarmByIdUseCase: GetAlarmByIdUseCase,
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(AlarmListState(isDarkMode = false))
+    private val _uiState = MutableStateFlow(AlarmListState())
     val uiState: StateFlow<AlarmListState> = _uiState.asStateFlow()
 
     init {
@@ -55,6 +55,7 @@ class AlarmListViewModel @Inject constructor(
 
 
     }
+
 
 }
 
